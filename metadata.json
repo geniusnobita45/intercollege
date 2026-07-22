@@ -1,0 +1,5 @@
+{
+  "name": "HLS Inter College Animated Admissions Website",
+  "description": "A responsive HLS Inter College website with a scroll-controlled frame animation, online student registration, teacher directory and individual faculty profiles.",
+  "requestFramePermissions": []
+}
