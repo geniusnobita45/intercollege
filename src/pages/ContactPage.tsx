@@ -1,4 +1,4 @@
-﻿import { useState, FormEvent } from 'react';
+import { useState, FormEvent } from 'react';
 import { Phone, Mail, MapPin, Clock, Send, CheckCircle2, ShieldCheck } from 'lucide-react';
 import InnerPageHero from '../components/InnerPageHero';
 import NatureVerseScene from '../components/NatureVerseScene';
@@ -42,7 +42,7 @@ export default function ContactPage() {
             <Clock className="h-8 w-8 text-orange-200/80" />
             <h2 className="mt-3 text-lg font-bold">Office Hours</h2>
             <p className="mt-2 text-sm leading-[1.7] text-teal-50/85">
-              Monday to Saturday: 8:00 AM â€“ 3:00 PM (IST). Visiting hours for parents and guardians.
+              Monday to Saturday: 8:00 AM - 3:00 PM (IST). Visiting hours for parents and guardians.
             </p>
           </>
         }
@@ -68,9 +68,9 @@ export default function ContactPage() {
                     <Phone className="h-6 w-6" />
                   </div>
                   <h3 className="font-display text-lg font-bold text-text-dark">Phone Contacts</h3>
-                  <p className="mt-2 text-sm font-semibold text-secondary">{college.phones.join(' Â· ')}</p>
+                  <p className="mt-2 text-sm font-semibold text-secondary">{college.phones.join(' | ')}</p>
                 </div>
-                <p className="mt-4 text-xs font-bold uppercase tracking-wider text-primary">Call Admission Desk â†’</p>
+                <p className="mt-4 text-xs font-bold uppercase tracking-wider text-primary">Call Admission Desk -&gt;</p>
               </a>
             </FadeUp>
 
@@ -86,7 +86,7 @@ export default function ContactPage() {
                   <h3 className="font-display text-lg font-bold text-text-dark">Email Us</h3>
                   <p className="mt-2 text-sm font-semibold text-secondary break-all">{college.email}</p>
                 </div>
-                <p className="mt-4 text-xs font-bold uppercase tracking-wider text-primary">Send Direct Email â†’</p>
+                <p className="mt-4 text-xs font-bold uppercase tracking-wider text-primary">Send Direct Email -&gt;</p>
               </a>
             </FadeUp>
 
@@ -104,7 +104,7 @@ export default function ContactPage() {
                   <h3 className="font-display text-lg font-bold text-text-dark">Campus Location</h3>
                   <p className="mt-2 text-xs leading-relaxed text-text-light">{college.address}</p>
                 </div>
-                <p className="mt-4 text-xs font-bold uppercase tracking-wider text-primary">Open Google Maps â†’</p>
+                <p className="mt-4 text-xs font-bold uppercase tracking-wider text-primary">Open Google Maps -&gt;</p>
               </a>
             </FadeUp>
 
@@ -116,11 +116,11 @@ export default function ContactPage() {
                   </div>
                   <h3 className="font-display text-lg font-bold text-text-dark">Visiting Hours</h3>
                   <p className="mt-2 text-xs leading-relaxed text-text-light">
-                    Mon â€“ Sat: 8:00 AM â€“ 3:00 PM<br />
+                    Mon - Sat: 8:00 AM - 3:00 PM<br />
                     Sundays & Holidays: Closed
                   </p>
                 </div>
-                <p className="mt-4 text-xs font-semibold text-secondary">Devmanpur Â· Ghatampur</p>
+                <p className="mt-4 text-xs font-semibold text-secondary">Devmanpur | Ghatampur</p>
               </div>
             </FadeUp>
           </div>

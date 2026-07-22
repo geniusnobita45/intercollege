@@ -12,7 +12,7 @@ export type NatureVerseRoute =
   | '404'
   | 'inner';
 
-export type QualityTier = 'high' | 'medium' | 'low' | 'static';
+export type QualityTier = 'high' | 'medium' | 'low' | 'minimal';
 
 export type ParticleLayerName = 'distant' | 'mid' | 'foreground' | 'ground';
 
@@ -47,5 +47,6 @@ export interface EngineRuntimeOptions {
   route: NatureVerseRoute;
   active: boolean;
   reducedMotion: boolean;
+  performanceTier: import('../../utils/performanceTier').PerformanceTier;
   onFallback: () => void;
 }

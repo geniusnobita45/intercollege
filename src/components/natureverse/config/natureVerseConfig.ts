@@ -1,3 +1,4 @@
+import type { PerformanceTier } from '../../../utils/performanceTier';
 import type { AtmosphereState, NatureVerseRoute, QualitySettings, QualityTier } from '../types';
 
 export const natureVersePalette = {
@@ -26,23 +27,20 @@ export const routeAtmospheres: Record<NatureVerseRoute, AtmosphereState> = {
   inner: { fogColor: 0x203f2d, fogDensity: 0.025, rayIntensity: 1, pollenWarmth: 1, groundGlow: 1, streakFrequency: 0.9 },
 };
 
-export function getInitialQuality(reducedMotion: boolean): QualitySettings {
+function toQualityTier(performanceTier: PerformanceTier, reducedMotion: boolean): QualityTier {
+  if (reducedMotion || performanceTier === 'minimal') return 'minimal';
+  return performanceTier;
+}
+
+export function getInitialQuality(reducedMotion: boolean, performanceTier: PerformanceTier): QualitySettings {
   if (typeof window === 'undefined') {
-    return makeSettings('static', reducedMotion);
+    return makeSettings('minimal', reducedMotion);
   }
 
-  const width = window.innerWidth;
-  const dpr = window.devicePixelRatio || 1;
-  const touch = window.matchMedia('(pointer: coarse)').matches || navigator.maxTouchPoints > 0;
-  const cores = navigator.hardwareConcurrency || 4;
   const canvas = document.createElement('canvas');
   const hasWebGL = Boolean(canvas.getContext('webgl2') || canvas.getContext('webgl'));
-
-  if (!hasWebGL) return makeSettings('static', reducedMotion);
-  if (reducedMotion) return makeSettings('low', true);
-  if (width < 640 || touch || cores <= 4 || dpr > 2.25) return makeSettings('low', false);
-  if (width < 1100 || cores <= 6 || dpr > 1.75) return makeSettings('medium', false);
-  return makeSettings('high', false);
+  if (!hasWebGL) return makeSettings('minimal', reducedMotion);
+  return makeSettings(toQualityTier(performanceTier, reducedMotion), reducedMotion);
 }
 
 export function makeSettings(tier: QualityTier, reducedMotion: boolean): QualitySettings {
@@ -58,26 +56,26 @@ export function makeSettings(tier: QualityTier, reducedMotion: boolean): Quality
       parallax: true,
     },
     medium: {
-      distantDust: 380,
-      midPollen: 170,
-      foreground: 44,
-      groundGrowth: 86,
+      distantDust: 430,
+      midPollen: 180,
+      foreground: 32,
+      groundGrowth: 90,
       sunRays: 5,
-      streakInterval: [3.2, 6] as [number, number],
-      pixelRatio: 1.35,
+      streakInterval: [3.6, 6.8] as [number, number],
+      pixelRatio: 1.25,
       parallax: true,
     },
     low: {
-      distantDust: 210,
-      midPollen: 105,
-      foreground: 26,
-      groundGrowth: 58,
+      distantDust: 240,
+      midPollen: 95,
+      foreground: 0,
+      groundGrowth: 52,
       sunRays: 3,
-      streakInterval: [4.4, 7.8] as [number, number],
-      pixelRatio: 1.2,
+      streakInterval: [7.5, 12] as [number, number],
+      pixelRatio: 1,
       parallax: false,
     },
-    static: {
+    minimal: {
       distantDust: 0,
       midPollen: 0,
       foreground: 0,
@@ -94,7 +92,7 @@ export function makeSettings(tier: QualityTier, reducedMotion: boolean): Quality
     ...selected,
     tier,
     reducedMotion,
-    pixelRatio: Math.min(window.devicePixelRatio || 1, selected.pixelRatio),
+    pixelRatio: typeof window === 'undefined' ? selected.pixelRatio : Math.min(window.devicePixelRatio || 1, selected.pixelRatio),
     parallax: selected.parallax && !reducedMotion,
     streakInterval: reducedMotion ? [999, 999] : selected.streakInterval,
   };

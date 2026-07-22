@@ -1,9 +1,9 @@
-﻿@import "tailwindcss";
+@import "tailwindcss";
 
 @theme {
-  --font-sans: "Manrope", "Segoe UI", system-ui, sans-serif;
-  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
-  --font-hero: "Nunito", ui-rounded, "Segoe UI", system-ui, sans-serif;
+  --font-sans: "Open Sans", "Segoe UI", system-ui, sans-serif;
+  --font-display: "Merriweather", Georgia, "Times New Roman", serif;
+  --font-hero: "Merriweather", Georgia, "Times New Roman", serif;
   --color-primary: #f5841f;
   --color-secondary: #2f7774;
   --color-tertiary: #f9f5f0;
@@ -12,17 +12,17 @@
 }
 
 /* ------------------------------------------------------------------ */
-/* Typography scale â€” fluid with clamp()                              */
+/* Typography scale - classic corporate, fluid with clamp()           */
 /* ------------------------------------------------------------------ */
 :root {
   --text-xs: clamp(0.75rem, 0.72rem + 0.1vw, 0.82rem);
-  --text-sm: clamp(0.875rem, 0.84rem + 0.12vw, 0.95rem);
-  --text-base: clamp(1rem, 0.97rem + 0.12vw, 1.075rem);
-  --text-lg: clamp(1.125rem, 1.06rem + 0.25vw, 1.3rem);
-  --text-xl: clamp(1.35rem, 1.2rem + 0.45vw, 1.65rem);
-  --text-2xl: clamp(1.7rem, 1.42rem + 0.8vw, 2.25rem);
-  --text-3xl: clamp(2.15rem, 1.7rem + 1.4vw, 3.25rem);
-  --text-page-title: clamp(2.7rem, 2rem + 2.3vw, 4.8rem);
+  --text-sm: clamp(0.875rem, 0.82rem + 0.18vw, 1rem);
+  --text-base: clamp(1rem, 0.95rem + 0.24vw, 1.25rem);
+  --text-lg: clamp(1rem, 0.95rem + 0.34vw, 1.375rem);
+  --text-xl: clamp(1.375rem, 1.16rem + 0.8vw, 1.75rem);
+  --text-2xl: clamp(1.375rem, 1.03rem + 1.34vw, 2.25rem);
+  --text-3xl: clamp(1.875rem, 1.28rem + 2.28vw, 3.4375rem);
+  --text-page-title: clamp(1.875rem, 1.08rem + 3.05vw, 3.4375rem);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -32,7 +32,26 @@
 }
 
 html { scroll-padding-top: 5rem; }
-body { margin: 0; min-width: 320px; background: #fff; }
+body {
+  margin: 0;
+  min-width: 320px;
+  background: #fff;
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: 400;
+  line-height: 1.65;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  line-height: 1.18;
+}
 button, a, input, textarea, select { -webkit-tap-highlight-color: transparent; }
 canvas { display: block; }
 
@@ -52,7 +71,7 @@ canvas { display: block; }
 }
 
 /* ------------------------------------------------------------------ */
-/* Inner-page shell â€” true fixed background                           */
+/* Inner-page shell - true fixed background                           */
 /* ------------------------------------------------------------------ */
 .inner-page-shell {
   position: relative;
@@ -73,7 +92,7 @@ canvas { display: block; }
   pointer-events: none;
 }
 
-/* Overlay â€” soft warm tint with subtle notebook grid texture */
+/* Overlay - soft warm tint with subtle notebook grid texture */
 .inner-page-shell::after {
   content: "";
   position: fixed;
@@ -298,7 +317,7 @@ input[type="file"]::file-selector-button:hover {
 }
 
 /* ================================================================== */
-/* PREMIUM NATUREVERSE â€” INTERNAL PAGES ONLY                          */
+/* PREMIUM NATUREVERSE - INTERNAL PAGES ONLY                          */
 /* Landing page is intentionally excluded from every selector below.  */
 /* ================================================================== */
 .natureverse-page {
@@ -899,7 +918,7 @@ input[type="file"]::file-selector-button:hover {
 }
 
 /* ================================================================== */
-/* HOME NATUREVERSE â€” ALL LANDING CONTENT BELOW THE EXISTING HERO     */
+/* HOME NATUREVERSE - ALL LANDING CONTENT BELOW THE EXISTING HERO     */
 /* The hero is deliberately outside .home-natureverse and untouched.  */
 /* ================================================================== */
 .home-natureverse {
@@ -973,18 +992,18 @@ input[type="file"]::file-selector-button:hover {
 .home-sv-contact-panel h2 {
   margin-top: .85rem;
   color: var(--hsv-ink);
-  font-size: clamp(2.25rem, 4vw, 4rem);
-  font-weight: 820;
-  line-height: 1.04;
-  letter-spacing: -.043em;
+  font-size: var(--text-2xl);
+  font-weight: 800;
+  line-height: 1.22;
+  letter-spacing: 0.04em;
 }
 .home-sv-section-header > p,
 .home-sv-section-header > div > p {
   max-width: 45rem;
   margin-top: 1.15rem;
   color: var(--hsv-muted);
-  font-size: clamp(1rem, 1.2vw, 1.1rem);
-  line-height: 1.75;
+  font-size: var(--text-base);
+  line-height: 1.65;
 }
 .home-sv-section-header--center > p { margin-inline: auto; }
 .home-sv-button {
@@ -1132,20 +1151,22 @@ input[type="file"]::file-selector-button:hover {
 .home-sv-values-core span { color: var(--hsv-muted); font-size: .65rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
 
 /* Stats atlas */
-.home-sv-stats-section { position: relative; overflow: hidden; padding-block: clamp(5rem,8vw,7.4rem); color: #fff; background: linear-gradient(130deg,#143b37 0%,#0e2e2b 55%,#173f3a 100%); }
-.home-sv-stats-grid { position: absolute; inset: 0; opacity: .35; background-image: linear-gradient(rgba(255,255,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.055) 1px,transparent 1px); background-size: 38px 38px; -webkit-mask-image: linear-gradient(90deg,transparent,#000 30%,#000 70%,transparent); mask-image: linear-gradient(90deg,transparent,#000 30%,#000 70%,transparent); }
-.home-sv-stats-orbit { position: absolute; right: -5rem; top: -6rem; display: grid; width: 23rem; height: 23rem; place-items: center; border: 1px dashed rgba(255,255,255,.12); border-radius: 999px; color: rgba(255,211,167,.12); }
+.home-sv-stats-section { position: relative; overflow: hidden; padding-block: clamp(5rem,8vw,7.4rem); color: #fff; background: #10372f; isolation: isolate; }
+.home-sv-stats-photo { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 45%; opacity: .5; filter: saturate(.96) contrast(1.04); }
+.home-sv-stats-photo-overlay { position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, rgba(11,35,30,.9) 0%, rgba(13,48,40,.7) 46%, rgba(12,43,35,.86) 100%); }
+.home-sv-stats-grid { position: absolute; inset: 0; z-index: 2; opacity: .35; background-image: linear-gradient(rgba(255,255,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.055) 1px,transparent 1px); background-size: 38px 38px; -webkit-mask-image: linear-gradient(90deg,transparent,#000 30%,#000 70%,transparent); mask-image: linear-gradient(90deg,transparent,#000 30%,#000 70%,transparent); }
+.home-sv-stats-orbit { position: absolute; z-index: 2; right: -5rem; top: -6rem; display: grid; width: 23rem; height: 23rem; place-items: center; border: 1px dashed rgba(255,255,255,.12); border-radius: 999px; color: rgba(255,211,167,.12); }
 .home-sv-stats-orbit::after { content: ""; position: absolute; inset: 3rem -4rem; border: 1px dashed rgba(245,132,31,.2); border-radius: 50%; transform: rotate(20deg); }
 .home-sv-stats-orbit svg { width: 8rem; height: 8rem; }
 .home-sv-stats-heading { position: relative; z-index: 2; display: grid; grid-template-columns: 1.1fr .9fr; gap: 2rem; align-items: end; margin-bottom: 3.3rem; }
 .home-sv-stats-heading h2 { color: #fff; max-width: 45rem; }
-.home-sv-stats-heading p { color: rgba(255,255,255,.64); line-height: 1.72; }
+.home-sv-stats-heading p { color: rgba(255,255,255,.74); font-size: var(--text-base); line-height: 1.65; }
 .home-sv-stats-list { position: relative; z-index: 2; display: grid; grid-template-columns: repeat(4,1fr); border: 1px solid rgba(255,255,255,.12); border-radius: 2.3rem; background: rgba(255,255,255,.05); backdrop-filter: blur(12px); }
 .home-sv-stat-card { position: relative; min-height: 13rem; padding: 2rem; border-right: 1px solid rgba(255,255,255,.1); }
 .home-sv-stat-card:last-child { border-right: 0; }
 .home-sv-stat-number { position: absolute; right: 1rem; top: .65rem; color: rgba(255,255,255,.07); font-family: var(--font-display); font-size: 3.2rem; font-weight: 900; }
 .home-sv-stat-card > svg { width: 1.8rem; height: 1.8rem; color: #ffc58d; }
-.home-sv-stat-card strong { display: block; margin-top: 1.7rem; font-family: var(--font-display); font-size: clamp(2.2rem,3vw,3.4rem); line-height: 1; }
+.home-sv-stat-card strong { display: block; margin-top: 1.7rem; font-family: var(--font-display); font-size: clamp(2rem,2.6vw,3rem); line-height: 1.08; letter-spacing: .04em; }
 .home-sv-stat-card p { margin-top: .65rem; color: rgba(255,255,255,.67); font-size: .78rem; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; }
 
 /* Learning universe */
@@ -1333,7 +1354,7 @@ input[type="file"]::file-selector-button:hover {
 @media (max-width: 640px) {
   .home-sv-section { padding-block: 4.7rem; }
   .home-sv-watermark { top: 1rem; font-size: 4.2rem; white-space: normal; line-height: .82; }
-  .home-sv-section-header h2,.home-sv-about-copy h2,.home-sv-stats-heading h2,.home-sv-contact-panel h2 { font-size: clamp(2.15rem,11vw,3.2rem); }
+  .home-sv-section-header h2,.home-sv-about-copy h2,.home-sv-stats-heading h2,.home-sv-contact-panel h2 { font-size: var(--text-2xl); }
   .home-sv-feature-zone,.home-sv-about-shell,.home-sv-values-shell,.home-sv-programs-shell,.home-sv-teachers-shell,.home-sv-events-shell { border-radius: 2rem; padding: 1.15rem; }
   .home-sv-feature-grid,.home-sv-program-grid,.home-sv-teacher-grid,.home-sv-event-grid { grid-template-columns: 1fr; }
   .home-sv-feature-card,.home-sv-program-card { min-height: 20rem; }
@@ -1364,7 +1385,7 @@ input[type="file"]::file-selector-button:hover {
 }
 
 /* ================================================================== */
-/* HLS NATUREVERSE â€” SUNLIGHT, LIVING GREEN & 3D ATMOSPHERIC MOTION   */
+/* HLS NATUREVERSE - SUNLIGHT, LIVING GREEN & 3D ATMOSPHERIC MOTION   */
 /* The existing landing-page Hero component remains outside this      */
 /* system and its scroll animation is not modified.                    */
 /* ================================================================== */
@@ -1762,8 +1783,7 @@ input[type="file"]::file-selector-button:hover {
 
 .home-sv-stats-section {
   background:
-    radial-gradient(circle at 12% 5%, rgba(255, 204, 99, 0.22), transparent 24rem),
-    radial-gradient(circle at 88% 95%, rgba(98, 160, 82, 0.22), transparent 28rem),
+    radial-gradient(circle at 12% 5%, rgba(255, 204, 99, 0.2), transparent 24rem),
     linear-gradient(135deg, #0b2f23, #154a34 58%, #1f5b3c);
 }
 .home-sv-stats-section::before,
@@ -2261,7 +2281,7 @@ body,
 .natureverse-page h2,
 .natureverse-page h3 {
   color: #103b2c;
-  letter-spacing: 0;
+  letter-spacing: 0.04em;
 }
 
 .home-natureverse p,
@@ -2849,4 +2869,58 @@ body,
   border-color: rgba(23, 63, 48, 0.12) !important;
   background: rgba(255, 255, 255, 0.78) !important;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.86);
+}
+
+.hero-poster {
+  opacity: 1;
+  transition: opacity 300ms ease;
+}
+
+.hero[data-animation-ready="true"] .hero-poster {
+  opacity: 0;
+  pointer-events: none;
+}
+
+
+[data-performance-tier="low"] .glass-surface,
+[data-performance-tier="minimal"] .glass-surface,
+[data-performance-tier="low"] .schoolverse-card,
+[data-performance-tier="minimal"] .schoolverse-card,
+[data-performance-tier="low"] [class*="backdrop-blur"],
+[data-performance-tier="minimal"] [class*="backdrop-blur"] {
+  backdrop-filter: none !important;
+}
+
+[data-performance-tier="low"] .natureverse-canvas {
+  opacity: 0.42;
+}
+
+[data-performance-tier="minimal"] .natureverse-canvas {
+  display: none !important;
+}
+
+[data-performance-tier="minimal"] .natureverse-root,
+.natureverse-root--fallback {
+  background:
+    radial-gradient(circle at 12% 8%, rgba(255, 217, 134, 0.18), transparent 24rem),
+    radial-gradient(circle at 88% 82%, rgba(91, 151, 82, 0.18), transparent 28rem),
+    linear-gradient(135deg, rgba(12, 44, 31, 0.82), rgba(22, 70, 46, 0.72));
+}
+
+[data-performance-tier="low"] .home-sv-aura,
+[data-performance-tier="minimal"] .home-sv-aura,
+[data-performance-tier="minimal"] .home-sv-stats-orbit,
+[data-performance-tier="minimal"] .home-sv-contact-route {
+  display: none !important;
+}
+
+[data-performance-tier="low"] .home-sv-feature-card:hover,
+[data-performance-tier="minimal"] .home-sv-feature-card:hover,
+[data-performance-tier="low"] .home-sv-program-card:hover,
+[data-performance-tier="minimal"] .home-sv-program-card:hover,
+[data-performance-tier="low"] .home-sv-teacher-card:hover,
+[data-performance-tier="minimal"] .home-sv-teacher-card:hover,
+[data-performance-tier="low"] .home-sv-event-card:hover,
+[data-performance-tier="minimal"] .home-sv-event-card:hover {
+  transform: none !important;
 }

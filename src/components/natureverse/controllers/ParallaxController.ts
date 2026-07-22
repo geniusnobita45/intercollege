@@ -20,7 +20,7 @@ export class ParallaxController {
 
   update(time: number) {
     if (!this.enabled) {
-      this.target.set(Math.sin(time * 0.08) * 0.18, Math.cos(time * 0.06) * 0.12);
+      this.target.set(0, 0);
     }
     this.current.x += (this.target.x - this.current.x) * 0.035;
     this.current.y += (this.target.y - this.current.y) * 0.035;

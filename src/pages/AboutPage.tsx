@@ -1,4 +1,4 @@
-﻿import { ArrowRight, BookOpen, Building, Users, Sparkles } from 'lucide-react';
+import { ArrowRight, BookOpen, Building, Users, Sparkles } from 'lucide-react';
 import InnerPageHero from '../components/InnerPageHero';
 import NatureVerseScene from '../components/NatureVerseScene';
 import StackingPage from '../components/stacking/StackingPage';
@@ -14,7 +14,7 @@ import { GrowthEcosystemMap } from '../components/natureverse/NatureVerseIllustr
 export default function AboutPage() {
   return (
     <main id="main-content" className="inner-page-shell sv-page sv-page--about">
-      {/* Controlled Background Rhythm â€” subtle notebook-grid texture and soft accent radials */}
+      {/* Controlled Background Rhythm — subtle notebook-grid texture and soft accent radials */}
       <div className="inner-page-bg-accents" aria-hidden="true" />
       <div className="pointer-events-none absolute right-5 top-40 h-96 w-96 rounded-full bg-orange-300/10 blur-3xl" aria-hidden="true" />
       <div className="pointer-events-none absolute left-5 top-[40%] h-[30rem] w-[30rem] rounded-full bg-teal-300/10 blur-3xl" aria-hidden="true" />
@@ -122,18 +122,18 @@ export default function AboutPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="schoolverse-feature-zone relative overflow-hidden">
               {/* NatureVerse living ecosystem background */}
-              <div className="absolute inset-0 flex items-center justify-center opacity-30 pointer-events-none">
+              <div className="absolute inset-0 flex items-center justify-center opacity-95 pointer-events-none">
                 <GrowthEcosystemMap className="w-full" />
               </div>
 
               <FadeUp>
                 <div className="relative z-10 mb-12 text-center">
                   <p className="text-xs font-bold uppercase tracking-[0.24em] text-primary">Connected Journey</p>
-                  <h2 className="mt-2 font-display font-bold text-text-dark" style={{ fontSize: 'clamp(2rem, 3.5vw, 3.4rem)' }}>
+                  <h2 className="mt-2 font-display font-bold text-text-dark" style={{ fontSize: 'var(--text-2xl)' }}>
                     The NatureVerse Growth Path
                   </h2>
-                  <p className="mx-auto mt-3 max-w-xl text-sm text-text-light">
-                    Learning â€¢ Character â€¢ Confidence â€¢ Growth â€” four connected pillars shaping every student's experience.
+                  <p className="mx-auto mt-3 max-w-xl text-text-light" style={{ fontSize: 'var(--text-base)', lineHeight: 1.65 }}>
+                    Learning | Character | Confidence | Growth - four connected pillars shaping every student's experience.
                   </p>
                 </div>
               </FadeUp>
@@ -201,7 +201,7 @@ export default function AboutPage() {
           <FadeUp>
             <div className="mb-12 text-center">
               <p className="text-xs font-bold uppercase tracking-[0.24em] text-primary">Educational Values</p>
-              <h2 className="mt-2 font-display font-bold text-text-dark" style={{ fontSize: 'clamp(2rem, 3.5vw, 3.4rem)' }}>
+              <h2 className="mt-2 font-display font-bold text-text-dark" style={{ fontSize: 'var(--text-2xl)' }}>
                 Values that shape future leaders
               </h2>
             </div>
@@ -249,7 +249,7 @@ export default function AboutPage() {
                 </p>
                 <div className="mt-8 flex flex-wrap gap-4">
                   <a
-                    href="/registration"
+                    href="/#registration"
                     className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-secondary transition hover:bg-orange-50 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/30"
                   >
                     Apply Online <ArrowRight className="h-4 w-4" />

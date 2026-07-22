@@ -1,11 +1,11 @@
-﻿import { Facebook, Mail, MapPin, Phone, Youtube } from 'lucide-react';
+import { Facebook, Mail, MapPin, Phone, Youtube } from 'lucide-react';
 import { college } from '../data/college';
 import CollegeImage from './CollegeImage';
 
 export default function Footer({ variant = 'landing' }: { variant?: 'landing' | 'inner' }) {
   return (
     <footer className={variant === 'inner' ? 'natureverse-footer relative z-10 bg-white' : 'natureverse-footer bg-white pt-20'}>
-      {/* Campus gallery â€” only on landing page */}
+      {/* Campus gallery - only on landing page */}
       {variant === 'landing' && (
         <div className="mx-auto -mt-32 mb-16 max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="rounded-[2rem] bg-secondary p-7 shadow-xl sm:p-10">
@@ -45,7 +45,7 @@ export default function Footer({ variant = 'landing' }: { variant?: 'landing' | 
                 <li><a href="/#about" className="transition hover:text-primary">About</a></li>
                 <li><a href="/#academics" className="transition hover:text-primary">Academics</a></li>
                 <li><a href="/#events" className="transition hover:text-primary">Events</a></li>
-                <li><a href="/registration" className="transition hover:text-primary">Online Registration</a></li>
+                <li><a href="/#registration" className="transition hover:text-primary">Online Registration</a></li>
               </ul>
             </div>
             <div>

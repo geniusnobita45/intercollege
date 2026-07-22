@@ -1,4 +1,4 @@
-﻿import { ArrowRight, BookOpen, Home, Sparkles, Users } from 'lucide-react';
+import { ArrowRight, BookOpen, Home, Sparkles, Users } from 'lucide-react';
 import type { ReactNode } from 'react';
 
 type Crumb = { label: string; href?: string };
@@ -61,7 +61,7 @@ export default function InnerPageHero({
 
           <h1
             className="mt-5 max-w-4xl font-display font-bold leading-[1.01] text-white drop-shadow-sm"
-            style={{ fontSize: 'var(--text-page-title)', letterSpacing: '-0.035em' }}
+            style={{ fontSize: 'var(--text-page-title)', letterSpacing: '0.04em' }}
           >
             {title}
           </h1>
@@ -93,7 +93,7 @@ export default function InnerPageHero({
 
       <div className="sv-hero-bottom-line" aria-hidden="true">
         <span />
-        <strong>ROOT Â· LEARN Â· BLOOM</strong>
+        <strong>ROOT · LEARN · BLOOM</strong>
         <span />
       </div>
     </section>

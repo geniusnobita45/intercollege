@@ -1,4 +1,4 @@
-﻿import { ArrowRight, CheckCircle2, Map, Phone, School, Sparkles } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Map, Phone, School, Sparkles } from 'lucide-react';
 import { college } from '../data/college';
 import CollegeImage from './CollegeImage';
 
@@ -27,7 +27,7 @@ export default function LearnToPlay() {
               </div>
             </div>
             <div className="home-sv-floating-note home-sv-floating-note--top"><School /> Co-educational campus</div>
-            <div className="home-sv-floating-note home-sv-floating-note--bottom"><Map /> Devmanpur Â· Ghatampur</div>
+            <div className="home-sv-floating-note home-sv-floating-note--bottom"><Map /> Devmanpur | Ghatampur</div>
           </div>
 
           <div className="home-sv-about-copy">

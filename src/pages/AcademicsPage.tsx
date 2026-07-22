@@ -1,4 +1,4 @@
-﻿import { useState } from 'react';
+import { useState } from 'react';
 import { BookOpen, Atom, Calculator, Globe, BriefcaseBusiness, Palette, Sparkles, CheckCircle2, ArrowRight, Compass } from 'lucide-react';
 import InnerPageHero from '../components/InnerPageHero';
 import NatureVerseScene from '../components/NatureVerseScene';
@@ -135,9 +135,9 @@ export default function AcademicsPage() {
               <div className="flex overflow-x-auto gap-2 scrollbar-none py-1 px-1">
                 {[
                   { id: 'all', label: 'All Learning Stages' },
-                  { id: 'foundation', label: '01. Middle School (6â€“8)' },
-                  { id: 'secondary', label: '02. High School (9â€“10)' },
-                  { id: 'senior', label: '03. Intermediate (11â€“12)' },
+                  { id: 'foundation', label: '01. Middle School (6-8)' },
+                  { id: 'secondary', label: '02. High School (9-10)' },
+                  { id: 'senior', label: '03. Intermediate (11-12)' },
                   { id: 'pathways', label: '04. Future Pathways' },
                 ].map(tab => (
                   <button
@@ -246,7 +246,7 @@ export default function AcademicsPage() {
                 </p>
                 <div className="mt-8 flex flex-wrap gap-4">
                   <a
-                    href="/registration"
+                    href="/#registration"
                     className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-secondary transition hover:bg-orange-50"
                   >
                     Register Student Online <ArrowRight className="h-4 w-4" />

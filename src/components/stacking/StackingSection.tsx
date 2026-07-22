@@ -1,4 +1,4 @@
-import { useEffect, useRef, type CSSProperties } from 'react';
+import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { useSectionTraversal } from './useSectionTraversal';
 import { useStackEligibility } from './useStackEligibility';
 import type { StackingSectionProps } from './stackingTypes';
@@ -17,17 +17,33 @@ export default function StackingSection({
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const bottomSentinelRef = useRef<HTMLDivElement>(null);
+  const [lowBudget, setLowBudget] = useState(() => {
+    if (typeof document === 'undefined') return false;
+    const tier = document.documentElement.dataset.performanceTier;
+    return tier === 'low' || tier === 'minimal';
+  });
   const traversed = useSectionTraversal(bottomSentinelRef);
   const { canStack, focused, metrics, mode } = useStackEligibility(sectionRef, contentRef, {
     allowStacking,
-    forceFlow,
+    forceFlow: forceFlow || lowBudget,
     interactive,
   });
 
+
+  useEffect(() => {
+    const updateTier = (event?: Event) => {
+      const tier = (event as CustomEvent<string> | undefined)?.detail ?? document.documentElement.dataset.performanceTier;
+      setLowBudget(tier === 'low' || tier === 'minimal');
+    };
+
+    updateTier();
+    window.addEventListener('hls:performance-tier-change', updateTier);
+    return () => window.removeEventListener('hls:performance-tier-change', updateTier);
+  }, []);
   useEffect(() => {
     const wrapper = wrapperRef.current;
     const section = sectionRef.current;
-    if (!wrapper || !section || !canStack || focused) return;
+    if (!wrapper || !section || !canStack || focused || lowBudget) return;
 
     let animationFrame = 0;
     const updateMotion = () => {
@@ -60,7 +76,7 @@ export default function StackingSection({
       section.style.removeProperty('--stack-brightness');
       section.style.removeProperty('--stack-blur');
     };
-  }, [canStack, focused, metrics.navbarHeight]);
+  }, [canStack, focused, lowBudget, metrics.navbarHeight]);
 
   const style = {
     '--stack-index': index,
@@ -77,6 +93,7 @@ export default function StackingSection({
       data-stack-traversed={traversed ? 'true' : 'false'}
       data-stack-focused={focused ? 'true' : 'false'}
       data-stack-interactive={interactive ? 'true' : 'false'}
+      data-stack-low-budget={lowBudget ? 'true' : 'false'}
       style={style}
     >
       <article

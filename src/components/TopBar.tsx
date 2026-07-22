@@ -20,7 +20,7 @@ export default function TopBar() {
           </a>
         </div>
         <div className="flex items-center gap-4 text-gray-400">
-          <a href="/registration" className="flex items-center gap-1.5 font-black text-primary hover:text-orange-700"><FileText className="h-4 w-4" /> Online Registration</a>
+          <a href="/#registration" className="flex items-center gap-1.5 font-black text-primary hover:text-orange-700"><FileText className="h-4 w-4" /> Online Registration</a>
           <span className="hidden font-semibold text-gray-500 lg:inline">Follow:</span>
           <a href={college.facebook} aria-label="HLS Inter College on Facebook" target="_blank" rel="noreferrer" className="hover:text-primary"><Facebook className="h-4 w-4" /></a>
           <a href={college.youtube} aria-label="HLS Inter College on YouTube" target="_blank" rel="noreferrer" className="hover:text-primary"><Youtube className="h-4 w-4" /></a>

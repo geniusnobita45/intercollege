@@ -7,7 +7,7 @@ interface IllustrationProps {
 export function GrowthEcosystemMap({ className = '' }: { className?: string }) {
   return (
     <div className={`relative flex items-center justify-center pointer-events-none select-none ${className}`}>
-      <svg className="h-auto w-full max-w-3xl opacity-25" viewBox="0 0 760 360" fill="none" aria-hidden="true">
+      <svg className="h-auto w-full max-w-3xl opacity-75" viewBox="0 0 760 360" fill="none" aria-hidden="true">
         <defs>
           <linearGradient id="natureBranch" x1="120" y1="310" x2="650" y2="45" gradientUnits="userSpaceOnUse">
             <stop stopColor="#866d4f" />

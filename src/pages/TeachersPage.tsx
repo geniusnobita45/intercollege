@@ -1,4 +1,4 @@
-﻿import { ArrowRight, BookOpenCheck, Search, ShieldCheck, Users } from 'lucide-react';
+import { ArrowRight, BookOpenCheck, Search, ShieldCheck, Users } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import InnerPageHero from '../components/InnerPageHero';
 import NatureVerseScene from '../components/NatureVerseScene';
@@ -195,7 +195,7 @@ export default function TeachersPage() {
           <div className="rounded-[1.75rem] bg-secondary p-7 text-white shadow-xl backdrop-blur-md">
             <h2 className="text-base font-bold">Interested in admission?</h2>
             <p className="mt-2 text-sm leading-[1.7] text-teal-50/90">Complete online registration for the upcoming academic session.</p>
-            <a href="/registration" className="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-secondary transition hover:bg-orange-50">
+            <a href="/#registration" className="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-secondary transition hover:bg-orange-50">
               Register Online <ArrowRight className="h-4 w-4" />
             </a>
           </div>

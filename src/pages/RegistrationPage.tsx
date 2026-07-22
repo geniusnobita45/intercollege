@@ -1,4 +1,4 @@
-﻿import { ArrowLeft, ArrowRight, Check, CheckCircle2, Clock3, FileCheck2, GraduationCap, Phone, Printer, Save, ShieldCheck, Upload, UserRound } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Check, CheckCircle2, Clock3, FileCheck2, GraduationCap, Phone, Printer, Save, ShieldCheck, Upload, UserRound } from 'lucide-react';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { FormEvent, ReactNode } from 'react';
 import InnerPageHero from '../components/InnerPageHero';
@@ -278,7 +278,7 @@ export default function RegistrationPage() {
                   <Field label="Alternate mobile"><Input name="alternatePhone" value={values.alternatePhone} onValue={update} inputMode="tel" pattern="[0-9+ -]{10,16}" /></Field>
                   <Field label="Email address"><Input type="email" name="guardianEmail" value={values.guardianEmail} onValue={update} autoComplete="email" /></Field>
                   <Field label="Occupation"><Input name="occupation" value={values.occupation} onValue={update} /></Field>
-                  <Field label="Approx. annual family income"><Select name="annualIncome" value={values.annualIncome} onValue={update} options={['Below â‚¹1 lakh', 'â‚¹1â€“3 lakh', 'â‚¹3â€“5 lakh', 'â‚¹5â€“10 lakh', 'Above â‚¹10 lakh', 'Prefer not to say']} placeholder="Select range" /></Field>
+                  <Field label="Approx. annual family income"><Select name="annualIncome" value={values.annualIncome} onValue={update} options={['Below Rs.1 lakh', 'Rs.1-3 lakh', 'Rs.3-5 lakh', 'Rs.5-10 lakh', 'Above Rs.10 lakh', 'Prefer not to say']} placeholder="Select range" /></Field>
                   <div className="hidden sm:block" />
                 </div>
                 <div className="mt-2 border-t border-gray-100/60 pt-6">
@@ -298,7 +298,7 @@ export default function RegistrationPage() {
                 <SectionTitle title="Academic information" text="Tell the college which class the student is applying for and the previous academic background." />
                 <div className="grid gap-5 sm:grid-cols-2">
                   <Field label="Applying for class" required><Select name="applyingClass" value={values.applyingClass} onValue={update} required options={college.admissionClasses} placeholder="Select class" /></Field>
-                  <Field label="Preferred stream"><Select name="preferredStream" value={values.preferredStream} onValue={update} options={['Not applicable', 'Science', 'Commerce', 'Arts / Humanities', 'To be discussed']} placeholder="For Classes 11â€“12" /></Field>
+                  <Field label="Preferred stream"><Select name="preferredStream" value={values.preferredStream} onValue={update} options={['Not applicable', 'Science', 'Commerce', 'Arts / Humanities', 'To be discussed']} placeholder="For Classes 11-12" /></Field>
                   <Field label="Previous school" required><Input name="previousSchool" value={values.previousSchool} onValue={update} required /></Field>
                   <Field label="Last class completed" required><Input name="previousClass" value={values.previousClass} onValue={update} placeholder="Example: Class 8" required /></Field>
                   <Field label="Previous board"><Select name="previousBoard" value={values.previousBoard} onValue={update} options={['UP Board', 'CBSE', 'ICSE', 'Other', 'Not applicable']} placeholder="Select board" /></Field>
@@ -354,7 +354,7 @@ export default function RegistrationPage() {
                     disabled={submitting}
                     className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-orange-200/40 transition hover:bg-orange-600 disabled:cursor-wait disabled:opacity-70 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/25"
                   >
-                    {submitting ? 'Submittingâ€¦' : 'Submit registration'} <CheckCircle2 className="h-4 w-4" />
+                    {submitting ? 'Submitting...' : 'Submit registration'} <CheckCircle2 className="h-4 w-4" />
                   </button>
                 )}
               </div>

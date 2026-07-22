@@ -1,4 +1,4 @@
-﻿import { ArrowUpRight, BookOpen, BriefcaseBusiness, MonitorCog, Palette, Trophy } from 'lucide-react';
+import { ArrowUpRight, BookOpen, BriefcaseBusiness, MonitorCog, Palette, Trophy } from 'lucide-react';
 
 const focusAreas = [
   { number: '01', title: 'Academic Learning', subtitle: 'Strong Foundations', description: 'Structured classroom learning supported by discipline, regular practice and clear academic goals.', icon: BookOpen, tone: 'orange', href: '#academics' },
@@ -15,7 +15,7 @@ export default function Programs() {
           <header className="home-sv-section-header">
             <span className="home-sv-eyebrow">Academic & campus focus</span>
             <h2 id="academics-title">Education with room to discover.</h2>
-            <p>Each focus area is a connected path in a broader learning universeâ€”strong foundations, practical understanding, digital readiness and balanced growth.</p>
+            <p>Each focus area is a connected path in a broader learning universe-strong foundations, practical understanding, digital readiness and balanced growth.</p>
           </header>
 
           <div className="home-sv-subject-constellation" aria-hidden="true">

@@ -1,4 +1,4 @@
-﻿import { useEffect, useRef, useState, type RefObject } from 'react';
+import { lazy, Suspense, useEffect, useRef, useState, type RefObject } from 'react';
 import TopBar from './components/TopBar';
 import Header from './components/Header';
 import Hero from './components/Hero';
@@ -14,22 +14,31 @@ import Pricing from './components/Pricing';
 import Testimonials from './components/Testimonials';
 import Footer from './components/Footer';
 
-import RegistrationPage from './pages/RegistrationPage';
-import TeachersPage from './pages/TeachersPage';
-import TeacherProfilePage from './pages/TeacherProfilePage';
-import AboutPage from './pages/AboutPage';
-import LeadershipPage from './pages/LeadershipPage';
-import AcademicsPage from './pages/AcademicsPage';
-import EventsPage from './pages/EventsPage';
-import ContactPage from './pages/ContactPage';
-import GalleryPage from './pages/GalleryPage';
-
 import NatureVersePageWrapper from './components/NatureVersePageWrapper';
 import StackingPage from './components/stacking/StackingPage';
 import StackingSection from './components/stacking/StackingSection';
-import NatureVerseRoot from './components/natureverse/NatureVerseRoot';
 import type { NatureVerseRoute } from './components/natureverse/types';
 import { teachers } from './data/teachers';
+import {
+  getInitialPerformanceTier,
+  lowerPerformanceTier,
+  measureFrameRate,
+  refineTierWithFps,
+  setDocumentPerformanceTier,
+  startRuntimeFpsMonitor,
+  type PerformanceTier,
+} from './utils/performanceTier';
+
+const NatureVerseRoot = lazy(() => import('./components/natureverse/NatureVerseRoot'));
+const RegistrationPage = lazy(() => import('./pages/RegistrationPage'));
+const TeachersPage = lazy(() => import('./pages/TeachersPage'));
+const TeacherProfilePage = lazy(() => import('./pages/TeacherProfilePage'));
+const AboutPage = lazy(() => import('./pages/AboutPage'));
+const LeadershipPage = lazy(() => import('./pages/LeadershipPage'));
+const AcademicsPage = lazy(() => import('./pages/AcademicsPage'));
+const EventsPage = lazy(() => import('./pages/EventsPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
+const GalleryPage = lazy(() => import('./pages/GalleryPage'));
 
 function getRoute() {
   if (typeof window === 'undefined') return 'home';
@@ -58,6 +67,33 @@ function getRoute() {
   if (path.startsWith('/teachers/')) return 'teacher-profile';
 
   return 'home';
+}
+
+function scheduleIdle(callback: () => void) {
+  if ('requestIdleCallback' in window) {
+    window.requestIdleCallback(callback, { timeout: 2400 });
+    return;
+  }
+
+  globalThis.setTimeout(callback, 1200);
+}
+
+function NatureVerseFallback() {
+  return (
+    <div className="natureverse-root natureverse-root--fallback" aria-hidden="true">
+      <div className="natureverse-static" />
+    </div>
+  );
+}
+
+function RouteFallback() {
+  return (
+    <main id="main-content" className="inner-page-shell grid min-h-screen place-items-center px-4 pt-24">
+      <div className="rounded-lg border border-white/80 bg-white/90 px-5 py-4 text-sm font-semibold text-text-dark shadow-md">
+        Loading page...
+      </div>
+    </main>
+  );
 }
 
 function HomePage({ natureVerseStartRef }: { natureVerseStartRef: RefObject<HTMLDivElement | null> }) {
@@ -132,6 +168,44 @@ export default function App() {
   const [route, setRoute] = useState(getRoute);
   const natureVerseStartRef = useRef<HTMLDivElement>(null);
   const [homeNatureVerseActive, setHomeNatureVerseActive] = useState(false);
+  const [shouldLoadNatureVerse, setShouldLoadNatureVerse] = useState(() => getRoute() !== 'home');
+  const [performanceTier, setPerformanceTier] = useState<PerformanceTier>(() => getInitialPerformanceTier());
+
+  useEffect(() => {
+    let active = true;
+    setDocumentPerformanceTier(performanceTier);
+
+    measureFrameRate().then((fps) => {
+      if (!active) return;
+      const refined = refineTierWithFps(performanceTier, fps);
+      setPerformanceTier(refined);
+      setDocumentPerformanceTier(refined);
+    });
+
+    const cleanupMonitor = startRuntimeFpsMonitor({
+      initialTier: performanceTier,
+      onTierChange: setPerformanceTier,
+    });
+
+    const onMemoryPressure = () => {
+      setPerformanceTier((tier) => {
+        const next = lowerPerformanceTier(tier);
+        setDocumentPerformanceTier(next);
+        return next;
+      });
+    };
+
+    window.addEventListener('hls:memory-pressure', onMemoryPressure);
+    return () => {
+      active = false;
+      cleanupMonitor();
+      window.removeEventListener('hls:memory-pressure', onMemoryPressure);
+    };
+  }, []);
+
+  useEffect(() => {
+    setDocumentPerformanceTier(performanceTier);
+  }, [performanceTier]);
   useEffect(() => {
     const onLocationChange = () => {
       setRoute(getRoute());
@@ -153,6 +227,7 @@ export default function App() {
   useEffect(() => {
     if (!isHome) {
       setHomeNatureVerseActive(true);
+      setShouldLoadNatureVerse(true);
       return;
     }
 
@@ -178,6 +253,33 @@ export default function App() {
       observer.disconnect();
     };
   }, [isHome]);
+
+  useEffect(() => {
+    if (!isHome || shouldLoadNatureVerse) return;
+
+    const requestNatureVerse = () => setShouldLoadNatureVerse(true);
+    const lowBudget = performanceTier === 'low' || performanceTier === 'minimal';
+    window.addEventListener('hls:hero-post-boundary', requestNatureVerse, { once: true });
+    if (!lowBudget) {
+      window.addEventListener('hls:hero-critical-ready', requestNatureVerse, { once: true });
+      scheduleIdle(requestNatureVerse);
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) requestNatureVerse();
+      },
+      { rootMargin: lowBudget ? '420px 0px' : '1100px 0px', threshold: 0 }
+    );
+    if (natureVerseStartRef.current) observer.observe(natureVerseStartRef.current);
+
+    return () => {
+      window.removeEventListener('hls:hero-critical-ready', requestNatureVerse);
+      window.removeEventListener('hls:hero-post-boundary', requestNatureVerse);
+      observer.disconnect();
+    };
+  }, [isHome, shouldLoadNatureVerse, performanceTier]);
+
   useEffect(() => {
     if (route !== 'home') {
       window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
@@ -226,17 +328,17 @@ export default function App() {
 
   return (
     <div className="min-h-screen overflow-x-clip bg-transparent text-text-dark">
-      <NatureVerseRoot active={!isHome || homeNatureVerseActive} routeMode={route as NatureVerseRoute} />
+      {shouldLoadNatureVerse && (
+        <Suspense fallback={<NatureVerseFallback />}>
+          <NatureVerseRoot active={!isHome || homeNatureVerseActive} routeMode={route as NatureVerseRoute} performanceTier={performanceTier} />
+        </Suspense>
+      )}
       <a href="#main-content" className="fixed left-4 top-3 z-[100] -translate-y-24 rounded-lg bg-white px-4 py-2 text-sm font-semibold text-text-dark shadow-xl transition focus:translate-y-0">Skip to content</a>
       {!isHome && <TopBar />}
       <Header activeRoute={route} />
-      {pageContent}
+      {isHome ? pageContent : <Suspense fallback={<RouteFallback />}>{pageContent}</Suspense>}
       <Footer variant={isHome ? 'landing' : 'inner'} />
     </div>
   );
 }
-
-
-
-
 

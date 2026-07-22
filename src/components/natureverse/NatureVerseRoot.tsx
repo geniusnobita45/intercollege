@@ -1,14 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 import { NatureVerseEngine } from './NatureVerseEngine';
+import type { PerformanceTier } from '../../utils/performanceTier';
 import type { NatureVerseRoute } from './types';
 
 export default function NatureVerseRoot({
   active,
   routeMode,
+  performanceTier,
 }: {
   active: boolean;
   routeMode: NatureVerseRoute;
+  performanceTier: PerformanceTier;
 }) {
   const rootRef = useRef<HTMLDivElement>(null);
   const engineRef = useRef<NatureVerseEngine | null>(null);
@@ -22,6 +25,7 @@ export default function NatureVerseRoot({
       active,
       route: routeMode,
       reducedMotion,
+      performanceTier,
       onFallback: () => setFallback(true),
     });
     engineRef.current = engine;
@@ -32,8 +36,8 @@ export default function NatureVerseRoot({
   }, []);
 
   useEffect(() => {
-    engineRef.current?.updateOptions({ active, route: routeMode, reducedMotion });
-  }, [active, routeMode, reducedMotion]);
+    engineRef.current?.updateOptions({ active, route: routeMode, reducedMotion, performanceTier });
+  }, [active, routeMode, reducedMotion, performanceTier]);
 
   return (
     <div
@@ -41,6 +45,7 @@ export default function NatureVerseRoot({
       className={`natureverse-root ${active ? 'natureverse-root--active' : ''} ${fallback ? 'natureverse-root--fallback' : ''}`}
       data-natureverse-root
       data-route-mode={routeMode}
+      data-performance-tier={performanceTier}
       aria-hidden="true"
     >
       <div className="natureverse-static" />
